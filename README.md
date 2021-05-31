@@ -29,3 +29,9 @@ Port Mapping
 Configure CPU
 ======================
     > docker run -it --cpus=".25" ubuntu /bin/bash
+
+Build image and run container 
+======================
+    > docker build -t my-python-app .
+    > docker run -it --rm --name my-running-app my-python-app
+
