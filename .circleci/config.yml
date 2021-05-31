@@ -6,8 +6,17 @@ version: 2
 jobs:
   build:
     docker:
+      # specify the version you desire here
+      # use `-browsers` prefix for selenium tests, e.g. `3.6.1-browsers`
       - image: circleci/python:3.6.1
-    working_directory: ~/
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/dockerproject
+
     steps:
       - checkout
 
@@ -23,8 +32,7 @@ jobs:
           command: |
             python3 -m venv venv
             . venv/bin/activate
-            #pip install -r requirements.txt
-            make install
+            pip install -r requirements.txt
       - save_cache:
           paths:
             - ./venv
@@ -38,7 +46,7 @@ jobs:
             make test
       # run lints!
       - run:
-          name: run lint 
+          name: run lint
           command: |
             . venv/bin/activate
             make lint
